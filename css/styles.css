@@ -30,10 +30,32 @@ img {
   width: 100%;
 }
 
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 2000px;
+  }
+
+  .column-half {
+    width: 50%;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
 ul {
   list-style: none;
   display: flex;
-  align-items: center;
+  justify-content: center;
+}
+
+.background {
+  background: rgba(85, 84, 84, 0.582);
+}
+
+li {
+  padding-right: 20px;
 }
 
 .li-head {
@@ -54,31 +76,51 @@ ul {
   padding-top: 10px;
 }
 
-.item-list {
+.item-display {
+  display: block;
+}
+
+.item-overlay {
   display: flex;
 }
 
-.image-name {
-  display: flex;
-  font-size: 31px;
-  color: white;
-}
-
-.image-currency {
-  display: flex;
-  font-size: 31px;
-  color: white;
-}
-
-#vbucks {
-  width: 9%;
-  display: flex;
-}
-
-.background {
-  display: inline-block;
-  margin-top: -11em;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+.item-content {
+  background: rgba(0, 0, 0, 0.3);
   width: 100%;
+  color: white;
+  align-items: center;
+
+  /* margin-top: -8em; */
+}
+
+.item-name {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: -23px;
+}
+
+.item-price {
+  font-size: 21px;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  padding-right: 3px;
+}
+
+.price-icon {
+  width: 17%;
+  margin-bottom: -48px;
+  margin-left: 16px;
+}
+
+.rarity-rare {
+  background: radial-gradient(#2cc0ff, #143877);
+}
+
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
 }

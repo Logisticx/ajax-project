@@ -17,10 +17,10 @@
           <div class="nav-bar">
             <img id="icon-header" src="images/GyY5z0E.gif">
             <ul>
-              <li class="li-head"><a>Search</a></li>
-              <li class="li-head"><a>Previous Weeks</a></li>
-              <li class="li-head"><a>Item Database</a></li>
-              <li class="li-head"><a>Random Item</a></li>
+              <li id="search-nav" class="li-head"><a>Search</a></li>
+              <li id="previous-nav" class="li-head"><a>Previous Weeks</a></li>
+              <li id="database-nav" class="li-head"><a>Item Database</a></li>
+              <li id="random-nav" class="li-head"><a>Random Item</a></li>
             </ul>
           </div>
         </div>
@@ -42,31 +42,64 @@
         </div>
         <div class="row">
           <div class="column-full">
-            <div class="item-list">
+            <div class="background">
+              <ul class="item-list">
+              </ul>
               <ul>
                 <li>
-                  <div>
-
-                    <img src="images/fortnite-style-masked-mercenary-meowscles.jpg">
-                    <p class="image-name">Name</p>
-                    <p class="image-currency">1,900</p>
-                    <img id="vbucks" src="images/pngaaa.com-1614746.png">
-                    <div class="background">
-                    </div>
-
+                  <div class="items-reponsive">
+                    <a href="" class="item-display rarity-rare">
+                      <picture>
+                        <img src="images/featured_320.png">
+                      </picture>
+                      <div class="item-overlay">
+                        <div class="item-content">
+                          <h4 class="item-name">
+                            <span>Name</span>
+                          </h4>
+                          <p class="item-price">
+                            <img class="price-icon" src="images/pngaaa.com-1614746.png">
+                            1,900
+                          </p>
+                        </div>
+                      </div>
+                    </a>
                   </div>
-
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
+
+        <div class="countdown">
+          <h3>Next Reset:</h3>
+          <ul>
+            <li>
+              <span id="days"></span>
+              <p class="days-text">Days</p>
+            </li>
+            <li>
+              <span id="hours"></span>
+              <p class="hours-text">Hours</p>
+            </li>
+            <li>
+              <span id="minutes"></span>
+              <p class="minutes-text">Minutes</p>
+            </li>
+            <li>
+              <span id="seconds"></span>
+              <p class="seconds-text">Seconds</p>
+            </li>
+          </ul>
+
+        </div>
       </div>
     </div>
 
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
 </body>
 </html>
