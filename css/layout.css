@@ -13,6 +13,7 @@
   margin: 0 auto;
   font-family: sans-serif, sans;
   display: flex;
+  justify-content: center;
 }
 
 .row {

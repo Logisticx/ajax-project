@@ -71,7 +71,7 @@ function createNewEntry(object) {
   var pictureElement = document.createElement('picture');
   aElement.appendChild(pictureElement);
   var imgElement = document.createElement('img');
-  imgElement.src = 'images/featured_320.png';
+  imgElement.src = object.imageUrl;
   pictureElement.appendChild(imgElement);
   var divElementTwo = document.createElement('div');
   divElementTwo.className = 'item-overlay';
@@ -83,7 +83,7 @@ function createNewEntry(object) {
   h4Element.className = 'item-name';
   divElementThree.appendChild(h4Element);
   var spanElement = document.createElement('span');
-  spanElement.textContent = 'Name';
+  spanElement.textContent = object.name;
   h4Element.appendChild(spanElement);
   var divElementFour = document.createElement('div');
   divElementThree.appendChild(divElementFour);
@@ -93,16 +93,30 @@ function createNewEntry(object) {
   divElementFour.appendChild(imgElementTwo);
   var pElement = document.createElement('p');
   pElement.className = 'item-price';
-  pElement.textContent = '1,900';
+  pElement.textContent = object.vBucks;
   divElementFour.appendChild(pElement);
   return liElement;
-  // console.log(liElement);
 }
 
-var domContent = document.querySelector('.item-list');
-document.addEventListener('DOMContentLoaded', loadEntries);
+var targetUrl = encodeURIComponent('https://api.fortnitetracker.com/v1/store');
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
+xhr.setRequestHeader('TRN-Api-Key', '5289a2ea-def0-46ce-ad72-cdda47f8b5fa');
+xhr.responseType = 'json';
+xhr.addEventListener('load', function () {
+  for (var i = 0; i < xhr.response.length; i++) {
+    if (xhr.response[i].storeCategory === 'BRWeeklyStorefront') {
+      loadEntries(xhr.response[i]);
+    }
 
-function loadEntries() {
-  var entryElement = createNewEntry();
+  }
+});
+xhr.send();
+
+var domContent = document.querySelector('.item-list');
+
+function loadEntries(object) {
+  var entryElement = createNewEntry(object);
   domContent.prepend(entryElement);
+
 }
