@@ -8,13 +8,86 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/background.css">
 </head>
 <body>
   <header>
+    <div class="nav-container">
+      <div class="row">
+        <div class="column-full">
+          <div class="nav-bar">
+            <img id="icon-header" src="images/GyY5z0E.gif">
+            <ul>
+              <li id="search-nav" class="li-head"><a>Search</a></li>
+              <li id="previous-nav" class="li-head"><a>Previous Weeks</a></li>
+              <li id="database-nav" class="li-head"><a>Item Database</a></li>
+              <li id="random-nav" class="li-head"><a>Random Item</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </header>
   <main>
+
+    <div class="container">
+      <div class="view" data-view="featured-items">
+        <div class="row">
+          <div class="column-full">
+            <div class="featured-header">
+              <h1>Featured</h1>
+              <h2 id="week-time">Current Week</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div id="stars"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+            <div class="background">
+              <ul class="item-list">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div class="background">
+              <ul class="item-list-2">
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="countdown">
+          <h3>Next Reset:</h3>
+          <ul>
+            <li>
+              <span id="days"></span>
+              <p>Days</p>
+            </li>
+            <li>
+              <span id="hours"></span>
+              <p>Hours</p>
+            </li>
+            <li>
+              <span id="minutes"></span>
+              <p>Minutes</p>
+            </li>
+            <li>
+              <span id="seconds"></span>
+              <p>Seconds</p>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+.hidden {
+  display: none !important;
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0 auto;
+  font-family: sans-serif, sans;
+}
+
+.container {
+  max-width: 693px;
+  margin: 0 auto;
+  font-family: sans-serif, sans;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column-full {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
