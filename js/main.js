@@ -28,14 +28,6 @@ featuredNav.addEventListener('click', function () {
 // console.log(activeView);
 // console.log(hiddenView);
 
-// function createNewUl() {
-//   if (ulSelector.length === 6) {
-//     var newUl = document.createElement('ul');
-//     newUl.className = 'item-list';
-
-//   }
-// }
-
 function viewSwapping(string) {
   if (data.view === 'featured-page' || string === 'featured-page') {
     // activeView[0].className = 'view';
@@ -112,11 +104,15 @@ xhr.addEventListener('load', function () {
   }
 });
 xhr.send();
-
+var ulTwo = document.querySelector('.item-list-2');
 var domContent = document.querySelector('.item-list');
 
 function loadEntries(object) {
   var entryElement = createNewEntry(object);
-  domContent.prepend(entryElement);
+  if (domContent.childNodes.length !== 7) {
+    domContent.prepend(entryElement);
+  } else {
+    ulTwo.prepend(entryElement);
+  }
 
 }

@@ -36,3 +36,15 @@ var countDownFn = () => {
 };
 
 interval = setInterval(countDownFn, second);
+var week = document.getElementById('week-time');
+
+function setToMonday(date) {
+  var day = date.getDay() || 7;
+  if (day !== 1) {
+    date.setHours(-24 * (day - 1));
+    return date.toDateString();
+
+  }
+}
+
+week.innerHTML = 'Week of ' + setToMonday(new Date());
