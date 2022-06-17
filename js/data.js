@@ -11,7 +11,6 @@ window.addEventListener('beforeunload', dataString);
 function dataString(event) {
   var dataJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataJSON);
-
 }
 
 var previousentriesJSON = localStorage.getItem('javascript-local-storage');

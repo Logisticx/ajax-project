@@ -100,13 +100,12 @@ xhr.addEventListener('load', function () {
     if (xhr.response[i].storeCategory === 'BRWeeklyStorefront') {
       loadEntries(xhr.response[i]);
     }
-
   }
 });
 xhr.send();
+
 var ulTwo = document.querySelector('.item-list-2');
 var domContent = document.querySelector('.item-list');
-
 function loadEntries(object) {
   var entryElement = createNewEntry(object);
   if (domContent.childNodes.length !== 7) {
@@ -114,5 +113,4 @@ function loadEntries(object) {
   } else {
     ulTwo.prepend(entryElement);
   }
-
 }
