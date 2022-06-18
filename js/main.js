@@ -1,3 +1,4 @@
+
 var searchNav = document.getElementById('search-nav');
 searchNav.addEventListener('click', function () {
   viewSwapping('search-page');
@@ -106,6 +107,7 @@ xhr.send();
 
 var ulTwo = document.querySelector('.item-list-2');
 var domContent = document.querySelector('.item-list');
+
 function loadEntries(object) {
   var entryElement = createNewEntry(object);
   if (domContent.childNodes.length !== 7) {
@@ -114,3 +116,47 @@ function loadEntries(object) {
     ulTwo.prepend(entryElement);
   }
 }
+var week = document.getElementById('week-time');
+function setToMonday(date) {
+  var day = date.getDay() || 7;
+  if (day !== 1) {
+    date.setHours(-24 * (day - 1));
+    return date.toDateString();
+  }
+}
+week.innerHTML = 'Week of ' + setToMonday(new Date());
+
+function previousWeek(date) {
+  var day = date.getDay() || 7;
+  if (day !== 1) {
+    date.setUTCHours(0, 0, 0, 0);
+    date.setHours(date.getDay() - 180);
+
+    return date.toISOString();
+  }
+}
+// console.log(previousWeek(new Date()));
+// console.log();
+// console.log(previousWeek());
+var previousWeekDate = previousWeek();
+
+var xhrTwo = new XMLHttpRequest();
+xhrTwo.open('GET', 'https://fortnite-api.com/v2/shop/br/combined');
+xhrTwo.responseType = 'json'; // alternative to this is to JSON.parse(xhrTwo.response)
+xhrTwo.addEventListener('load', function () {
+  for (var u = 0; u < xhrTwo.response.data.featured.entries.length; u++) {
+    for (var o = 0; o < xhrTwo.response.data.featured.entries[u].items.length; o++) {
+      for (var y = 0; y < xhrTwo.response.data.featured.entries[u].items[o].shopHistory.length; y++) {
+        if (xhrTwo.response.data.featured.entries[u].items[o].shopHistory[y] === previousWeekDate) {
+          // console.log(xhrTwo.response.data.featured.entries[u].items[o]);
+          // console.log('firing');
+        }
+      }
+    }
+  }
+
+  // console.log('entries', xhrTwo.response.data.featured.entries[0]);
+  // console.log('items', xhrTwo.response.data.featured.entries[0].items);
+  // console.log('shop history', xhrTwo.response.data.featured.entries[0].items[0].shopHistory);
+});
+xhrTwo.send();
