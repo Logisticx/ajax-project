@@ -2,6 +2,11 @@
   display: none !important;
 }
 
+.container-background {
+  width: 100%;
+  padding-left: 286px;
+}
+
 .nav-container {
   width: 100%;
   margin: 0 auto;

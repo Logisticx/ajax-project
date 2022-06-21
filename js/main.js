@@ -6,7 +6,7 @@ searchNav.addEventListener('click', function () {
 
 var previousNav = document.getElementById('previous-nav');
 previousNav.addEventListener('click', function () {
-  viewSwapping('previous-weeks-page');
+  viewSwapping('previous-weeks');
 });
 
 var databaseNav = document.getElementById('database-nav');
@@ -24,24 +24,24 @@ featuredNav.addEventListener('click', function () {
   viewSwapping('featured-page');
 });
 
-// var activeView = document.querySelectorAll('view');
-// var hiddenView = document.querySelectorAll('hidden');
+var activeView = document.querySelectorAll('.view');
+var hiddenView = document.querySelectorAll('.hidden');
 // console.log(activeView);
 // console.log(hiddenView);
 
 function viewSwapping(string) {
-  if (data.view === 'featured-page' || string === 'featured-page') {
-    // activeView[0].className = 'view';
-    // hiddenView[0].className = 'view hidden';
-    // console.log('firing 1');
+  if (event.target.className === 'featured-page' || string === 'featured-page') {
+    activeView[0].className = 'view';
+    hiddenView[0].className = 'view hidden';
+    data.view = 'featured-page';
   } else if (data.view === 'search-page' || string === 'search-page') {
     // activeView[0].className = 'view';
     // // hiddenView[0].className = 'view hidden';
     // console.log('firing 2');
-  } else if (data.view === 'previous-weeks-page' || string === 'previous-weeks-page') {
-    // activeView[0].className = 'view';
-    // hiddenView[0].className = 'view hidden';
-    // console.log('firing 3');
+  } else if (event.target.className === 'previous-weeks' || string === 'previous-weeks') {
+    activeView[0].className = 'view hidden';
+    hiddenView[0].className = 'view';
+    data.view = 'previous-weeks';
   } else if (data.view === 'item-database-page' || string === 'item-database-page') {
     // activeView[0].className = 'view';
     // hiddenView[0].className = 'view hidden';
@@ -99,46 +99,36 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
   for (var i = 0; i < xhr.response.length; i++) {
     if (xhr.response[i].storeCategory === 'BRWeeklyStorefront') {
-      loadEntries(xhr.response[i]);
+      loadFeatured(xhr.response[i]);
     }
   }
 });
 xhr.send();
 
-var ulTwo = document.querySelector('.item-list-2');
-var domContent = document.querySelector('.item-list');
+var featuredListTwo = document.querySelector('.featured-list-2');
+var featuredList = document.querySelector('.featured-list');
+var previousList = document.querySelector('.previous-list');
+var previousListTwo = document.querySelector('.previous-list-two');
+// var previousListThree = document.querySelector('.previous-list-three');
 
-function loadEntries(object) {
+function loadFeatured(object) {
   var entryElement = createNewEntry(object);
-  if (domContent.childNodes.length !== 7) {
-    domContent.prepend(entryElement);
-  } else {
-    ulTwo.prepend(entryElement);
+  if (featuredList.childNodes.length !== 7) {
+    featuredList.prepend(entryElement);
+  } else if (featuredList.childNodes.length === 7) {
+    featuredListTwo.prepend(entryElement);
   }
 }
-var week = document.getElementById('week-time');
-function setToMonday(date) {
-  var day = date.getDay() || 7;
-  if (day !== 1) {
-    date.setHours(-24 * (day - 1));
-    return date.toDateString();
+function loadPrevious(object) {
+  var entryElement = createNewEntry(object);
+  if (previousList.childNodes.length !== 7) {
+    previousList.prepend(entryElement);
+  } else if (previousList.childNodes.length === 7) {
+    previousListTwo.prepend(entryElement);
+  // } else if (previousListTwo.childNodes.length === 7) {
+  //   previousListThree.prepend(entryElement); no reading third if statement.
   }
 }
-week.innerHTML = 'Week of ' + setToMonday(new Date());
-
-function previousWeek(date) {
-  var day = date.getDay() || 7;
-  if (day !== 1) {
-    date.setUTCHours(0, 0, 0, 0);
-    date.setHours(date.getDay() - 180);
-
-    return date.toISOString();
-  }
-}
-// console.log(previousWeek(new Date()));
-// console.log();
-// console.log(previousWeek());
-var previousWeekDate = previousWeek();
 
 var xhrTwo = new XMLHttpRequest();
 xhrTwo.open('GET', 'https://fortnite-api.com/v2/shop/br/combined');
@@ -147,9 +137,15 @@ xhrTwo.addEventListener('load', function () {
   for (var u = 0; u < xhrTwo.response.data.featured.entries.length; u++) {
     for (var o = 0; o < xhrTwo.response.data.featured.entries[u].items.length; o++) {
       for (var y = 0; y < xhrTwo.response.data.featured.entries[u].items[o].shopHistory.length; y++) {
-        if (xhrTwo.response.data.featured.entries[u].items[o].shopHistory[y] === previousWeekDate) {
+        if (xhrTwo.response.data.featured.entries[u].items[o].shopHistory[y] === '2022-06-21T00:00:00Z') {
           // console.log(xhrTwo.response.data.featured.entries[u].items[o]);
           // console.log('firing');
+          /*
+          start is date object
+          what is it going to do: subtract seven days from start.
+          end with iso string
+          */
+          loadPrevious(xhrTwo.response.data.featured.entries[u].items[o]);
         }
       }
     }
