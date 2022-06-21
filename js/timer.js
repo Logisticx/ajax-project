@@ -14,6 +14,7 @@ function setToMonday(date) {
   } else {
     return date.toDateString();
   }
+  // create function to pass date.toDateString as an argument and subtract 7 days from that
 }
 week.innerHTML = 'Week of ' + setToMonday(new Date());
 
