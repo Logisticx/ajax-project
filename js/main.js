@@ -91,6 +91,40 @@ function createNewEntry(object) {
   return liElement;
 }
 
+function createPreviousEntry(object) {
+  var liElement = document.createElement('li');
+  var divElement = document.createElement('div');
+  divElement.className = 'items-responsive';
+  liElement.appendChild(divElement);
+  var aElement = document.createElement('a');
+  aElement.className = 'item-display rarity-rare';
+  divElement.appendChild(aElement);
+  var pictureElement = document.createElement('picture');
+  aElement.appendChild(pictureElement);
+  var imgElement = document.createElement('img');
+  imgElement.src = object.images.featured;
+  imgElement.src = object.images.icon;
+  pictureElement.appendChild(imgElement);
+  var divElementTwo = document.createElement('div');
+  divElementTwo.className = 'item-overlay';
+  aElement.appendChild(divElementTwo);
+  var divElementThree = document.createElement('div');
+  divElementThree.className = 'item-content';
+  divElementTwo.appendChild(divElementThree);
+  var h4Element = document.createElement('h4');
+  h4Element.className = 'item-name';
+  divElementThree.appendChild(h4Element);
+  var spanElement = document.createElement('span');
+  spanElement.textContent = object.name;
+  h4Element.appendChild(spanElement);
+  var divElementFour = document.createElement('div');
+  divElementThree.appendChild(divElementFour);
+  var imgElementTwo = document.createElement('img');
+  divElementFour.appendChild(imgElementTwo);
+  var pElement = document.createElement('p');
+  divElementFour.appendChild(pElement);
+  return liElement;
+}
 var targetUrl = encodeURIComponent('https://api.fortnitetracker.com/v1/store');
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
@@ -109,8 +143,8 @@ var featuredListTwo = document.querySelector('.featured-list-2');
 var featuredList = document.querySelector('.featured-list');
 var previousList = document.querySelector('.previous-list');
 var previousListTwo = document.querySelector('.previous-list-two');
-// var previousListThree = document.querySelector('.previous-list-three');
-
+var previousListThree = document.querySelector('.previous-list-three');
+var previousListFour = document.querySelector('.previous-list-four');
 function loadFeatured(object) {
   var entryElement = createNewEntry(object);
   if (featuredList.childNodes.length !== 7) {
@@ -120,13 +154,16 @@ function loadFeatured(object) {
   }
 }
 function loadPrevious(object) {
-  var entryElement = createNewEntry(object);
+  var entryElement = createPreviousEntry(object);
   if (previousList.childNodes.length !== 7) {
     previousList.prepend(entryElement);
-  } else if (previousList.childNodes.length === 7) {
+  } else if (previousList.childNodes.length === 7 && previousListTwo.childNodes.length !== 7) {
     previousListTwo.prepend(entryElement);
-  // } else if (previousListTwo.childNodes.length === 7) {
-  //   previousListThree.prepend(entryElement); no reading third if statement.
+  } else if (previousListTwo.childNodes.length === 7 && previousListThree.childNodes.length !== 7) {
+    previousListThree.prepend(entryElement);
+    // To make this less redundant, can create another function to create a dom tree with an incrementing name. Conditional statement would be incremental too.
+  } else if (previousListThree.childNodes.length === 7 && previousListFour.childNodes.length !== 7) {
+    previousListFour.prepend(entryElement);
   }
 }
 
