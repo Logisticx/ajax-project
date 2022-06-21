@@ -4,21 +4,28 @@ var dayInput = document.getElementById('days');
 var hourInput = document.getElementById('hours');
 var minuteInput = document.getElementById('minutes');
 var secondInput = document.getElementById('seconds');
-
+var previousWeekHeader = document.querySelector('.previous-week-head');
 var week = document.getElementById('week-time');
 function setToMonday(date) {
   var day = date.getDay() || 7;
   if (day !== 1) {
     date.setHours(-24 * (day - 1));
+    subtractSevenDays(date);
     return date.toDateString();
   } else {
+    subtractSevenDays(date);
     return date.toDateString();
   }
   // create function to pass date.toDateString as an argument and subtract 7 days from that
 }
 week.innerHTML = 'Week of ' + setToMonday(new Date());
+function subtractSevenDays(time) {
+  var newTime = time;
+  newTime.setDate(newTime.getDate() - 5);
+  previousWeekHeader.innerHTML = newTime.toDateString();
+}
 
-var endDate = new Date('June 21, 2022 23:00:00 GMT-3:00').getTime();
+var endDate = new Date('June 27, 2022 23:00:00 GMT-3:00').getTime();
 var countDownTimer = setInterval(() => {
   var now = new Date().getTime();
   var remainingTime = endDate - now;
@@ -35,7 +42,7 @@ var countDownTimer = setInterval(() => {
   minuteInput.innerHTML = minutesLeft;
   secondInput.innerHTML = secondsLeft;
 
-  if (remainingTime <= 0) {
-    endDate.setDate(endDate.getTime() + 7);
-  }
+  // if (remainingTime <= 0) {
+  //   endDate.setDate(endDate.getTime() + 7);
+  // } currently not working, have to set date manually at the moment.
 }, 1000);

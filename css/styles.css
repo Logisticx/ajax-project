@@ -134,6 +134,10 @@ li {
   color: #720e9e;
 }
 
-h1 {
+.previous-header {
   color: #5a2696;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

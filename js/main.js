@@ -1,26 +1,31 @@
 
 var searchNav = document.getElementById('search-nav');
 searchNav.addEventListener('click', function () {
+  data.view = 'search-page';
   viewSwapping('search-page');
 });
 
 var previousNav = document.getElementById('previous-nav');
 previousNav.addEventListener('click', function () {
+  data.view = 'previous-weeks';
   viewSwapping('previous-weeks');
 });
 
 var databaseNav = document.getElementById('database-nav');
 databaseNav.addEventListener('click', function () {
+  data.view = 'item-database-page';
   viewSwapping('item-database-page');
 });
 
 var randomNav = document.getElementById('random-nav');
 randomNav.addEventListener('click', function () {
+  data.view = 'random-item-page';
   viewSwapping('random-item-page');
 });
 
 var featuredNav = document.getElementById('icon-header');
 featuredNav.addEventListener('click', function () {
+  data.view = 'featured-page';
   viewSwapping('featured-page');
 });
 
@@ -30,7 +35,7 @@ var hiddenView = document.querySelectorAll('.hidden');
 // console.log(hiddenView);
 
 function viewSwapping(string) {
-  if (event.target.className === 'featured-page' || string === 'featured-page') {
+  if (event.target.className === 'featured-page' || string === 'featured-page' || data.view === 'featured-page') {
     activeView[0].className = 'view';
     hiddenView[0].className = 'view hidden';
     data.view = 'featured-page';
@@ -38,7 +43,7 @@ function viewSwapping(string) {
     // activeView[0].className = 'view';
     // // hiddenView[0].className = 'view hidden';
     // console.log('firing 2');
-  } else if (event.target.className === 'previous-weeks' || string === 'previous-weeks') {
+  } else if (event.target.className === 'previous-weeks' || string === 'previous-weeks' || data.view === 'previous-weeks') {
     activeView[0].className = 'view hidden';
     hiddenView[0].className = 'view';
     data.view = 'previous-weeks';
@@ -131,6 +136,7 @@ xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
 xhr.setRequestHeader('TRN-Api-Key', '5289a2ea-def0-46ce-ad72-cdda47f8b5fa');
 xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
+  viewSwapping();
   for (var i = 0; i < xhr.response.length; i++) {
     if (xhr.response[i].storeCategory === 'BRWeeklyStorefront') {
       loadFeatured(xhr.response[i]);
