@@ -4,26 +4,16 @@ var dayInput = document.getElementById('days');
 var hourInput = document.getElementById('hours');
 var minuteInput = document.getElementById('minutes');
 var secondInput = document.getElementById('seconds');
-var previousWeekHeader = document.querySelector('.previous-week-head');
+var previousDayHeader = document.getElementById('previous-week-head');
 var week = document.getElementById('week-time');
-function setToMonday(date) {
-  var day = date.getDay() || 7;
-  if (day !== 1) {
-    date.setHours(-24 * (day - 1));
-    subtractSevenDays(date);
-    return date.toDateString();
-  } else {
-    subtractSevenDays(date);
-    return date.toDateString();
-  }
-  // create function to pass date.toDateString as an argument and subtract 7 days from that
+
+function previousDay(date) {
+  var newTime = date;
+  newTime.setDate(newTime.getDate() - 1);
+  return newTime.toDateString();
 }
-week.innerHTML = 'Week of ' + setToMonday(new Date());
-function subtractSevenDays(time) {
-  var newTime = time;
-  newTime.setDate(newTime.getDate() - 5);
-  previousWeekHeader.innerHTML = newTime.toDateString();
-}
+week.innerHTML = new Date().toDateString();
+previousDayHeader.innerHTML = previousDay(new Date());
 
 var endDate = new Date('June 27, 2022 23:00:00 GMT-3:00').getTime();
 var countDownTimer = setInterval(() => {

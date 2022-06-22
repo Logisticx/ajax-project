@@ -173,6 +173,14 @@ function loadPrevious(object) {
   }
 }
 
+function previousDayConditional(date) {
+  var newTime = date;
+  newTime.setDate(newTime.getDate() - 1);
+  newTime.setUTCHours(0, 0, 0, 0);
+  return newTime.toISOString().slice(0, 16) + ':' + newTime.toISOString().slice(-3);
+  // Stretch feature : Button do decrement day time.
+}
+
 var xhrTwo = new XMLHttpRequest();
 xhrTwo.open('GET', 'https://fortnite-api.com/v2/shop/br/combined');
 xhrTwo.responseType = 'json'; // alternative to this is to JSON.parse(xhrTwo.response)
@@ -180,22 +188,11 @@ xhrTwo.addEventListener('load', function () {
   for (var u = 0; u < xhrTwo.response.data.featured.entries.length; u++) {
     for (var o = 0; o < xhrTwo.response.data.featured.entries[u].items.length; o++) {
       for (var y = 0; y < xhrTwo.response.data.featured.entries[u].items[o].shopHistory.length; y++) {
-        if (xhrTwo.response.data.featured.entries[u].items[o].shopHistory[y] === '2022-06-21T00:00:00Z') {
-          // console.log(xhrTwo.response.data.featured.entries[u].items[o]);
-          // console.log('firing');
-          /*
-          start is date object
-          what is it going to do: subtract seven days from start.
-          end with iso string
-          */
+        if (xhrTwo.response.data.featured.entries[u].items[o].shopHistory[y] === previousDayConditional(new Date())) {
           loadPrevious(xhrTwo.response.data.featured.entries[u].items[o]);
         }
       }
     }
   }
-
-  // console.log('entries', xhrTwo.response.data.featured.entries[0]);
-  // console.log('items', xhrTwo.response.data.featured.entries[0].items);
-  // console.log('shop history', xhrTwo.response.data.featured.entries[0].items[0].shopHistory);
 });
 xhrTwo.send();
