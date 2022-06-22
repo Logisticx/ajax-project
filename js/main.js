@@ -2,59 +2,63 @@
 var searchNav = document.getElementById('search-nav');
 searchNav.addEventListener('click', function () {
   data.view = 'search-page';
-  viewSwapping('search-page');
+  viewSwapping();
 });
 
 var previousNav = document.getElementById('previous-nav');
 previousNav.addEventListener('click', function () {
   data.view = 'previous-weeks';
-  viewSwapping('previous-weeks');
+  viewSwapping();
 });
 
 var databaseNav = document.getElementById('database-nav');
 databaseNav.addEventListener('click', function () {
   data.view = 'item-database-page';
-  viewSwapping('item-database-page');
+  viewSwapping();
 });
 
 var randomNav = document.getElementById('random-nav');
 randomNav.addEventListener('click', function () {
   data.view = 'random-item-page';
-  viewSwapping('random-item-page');
+  viewSwapping();
 });
 
 var featuredNav = document.getElementById('icon-header');
 featuredNav.addEventListener('click', function () {
   data.view = 'featured-page';
-  viewSwapping('featured-page');
+  viewSwapping();
 });
 
 var activeView = document.querySelectorAll('.view');
 var hiddenView = document.querySelectorAll('.hidden');
-// console.log(activeView);
-// console.log(hiddenView);
 
 function viewSwapping(string) {
-  if (event.target.className === 'featured-page' || string === 'featured-page' || data.view === 'featured-page') {
-    activeView[0].className = 'view';
-    hiddenView[0].className = 'view hidden';
-    data.view = 'featured-page';
-  } else if (data.view === 'search-page' || string === 'search-page') {
-    // activeView[0].className = 'view';
-    // // hiddenView[0].className = 'view hidden';
-    // console.log('firing 2');
-  } else if (event.target.className === 'previous-weeks' || string === 'previous-weeks' || data.view === 'previous-weeks') {
-    activeView[0].className = 'view hidden';
-    hiddenView[0].className = 'view';
-    data.view = 'previous-weeks';
-  } else if (data.view === 'item-database-page' || string === 'item-database-page') {
-    // activeView[0].className = 'view';
-    // hiddenView[0].className = 'view hidden';
-    // console.log('firing 4');
-  } else if (data.view === 'random-item-page' || string === 'random-item-page') {
-    // activeView[0].className = 'view';
-    // hiddenView[0].className = 'view hidden';
-    // console.log('firing 5');
+  for (var i = 0; i < hiddenView.length; i++) {
+    if (event.target.className === 'featured-page' || string === 'featured-page' || data.view === 'featured-page') {
+      activeView[0].className = 'view';
+      hiddenView[i].className = 'view hidden';
+      data.view = 'featured-page';
+    } else if (data.view === 'search-page' || string === 'search-page' || data.view === 'search-page') {
+      activeView[0].className = 'view hidden';
+      hiddenView[i].className = 'view hidden';
+      hiddenView[1].className = 'view';
+      data.view = 'search-page';
+    } else if (event.target.className === 'previous-weeks' || string === 'previous-weeks' || data.view === 'previous-weeks') {
+      activeView[0].className = 'view hidden';
+      hiddenView[i].className = 'view hidden';
+      hiddenView[0].className = 'view';
+      data.view = 'previous-weeks';
+    } else if (data.view === 'item-database-page' || string === 'item-database-page') {
+      activeView[0].className = 'view hidden';
+      hiddenView[i].className = 'view hidden';
+      hiddenView[2].className = 'view';
+      data.view = 'item-database-page';
+    } else if (data.view === 'random-item-page' || string === 'random-item-page') {
+      activeView[0].className = 'view hidden';
+      hiddenView[i].className = 'view hidden';
+      hiddenView[3].className = 'view';
+      data.view = 'random-item-page';
+    }
   }
 }
 
