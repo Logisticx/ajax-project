@@ -1,46 +1,38 @@
+/* eslint-disable no-unused-vars */
 
 var dayInput = document.getElementById('days');
 var hourInput = document.getElementById('hours');
 var minuteInput = document.getElementById('minutes');
 var secondInput = document.getElementById('seconds');
-
-var second = 1000;
-var minute = second * 60;
-var hour = minute * 60;
-var day = hour * 24;
-var interval;
-var eventDay = new Date('June 14, 2022 23:00:00 GMT-3:00');
-
-function addSevenDays() {
-  eventDay.setDate(eventDay.getDate() + 7);
-}
-
-var countDownFn = () => {
-  var today = new Date();
-  var timeSpan = eventDay - today;
-  if (timeSpan <= -today) {
-    clearInterval(interval);
-  } else if (timeSpan <= 0) {
-    addSevenDays();
-  } else {
-    var days = Math.floor(timeSpan / day);
-    var hours = Math.floor((timeSpan % day) / hour);
-    var minutes = Math.floor((timeSpan % hour) / minute);
-    var seconds = Math.floor((timeSpan % minute) / second);
-    dayInput.innerHTML = days;
-    hourInput.innerHTML = hours;
-    minuteInput.innerHTML = minutes;
-    secondInput.innerHTML = seconds;
-  }
-};
-interval = setInterval(countDownFn, second);
-
+var previousDayHeader = document.getElementById('previous-week-head');
 var week = document.getElementById('week-time');
-function setToMonday(date) {
-  var day = date.getDay() || 7;
-  if (day !== 1) {
-    date.setHours(-24 * (day - 1));
-    return date.toDateString();
-  }
+
+function previousDay(date) {
+  var newTime = date;
+  newTime.setDate(newTime.getDate() - 1);
+  return newTime.toDateString();
 }
-week.innerHTML = 'Week of ' + setToMonday(new Date());
+week.innerHTML = new Date().toDateString();
+previousDayHeader.innerHTML = previousDay(new Date());
+
+var endDate = new Date('June 27, 2022 23:00:00 GMT-3:00').getTime();
+var countDownTimer = setInterval(() => {
+  var now = new Date().getTime();
+  var remainingTime = endDate - now;
+  var second = 1000;
+  var minute = second * 60;
+  var hour = minute * 60;
+  var day = hour * 24;
+  var daysLeft = Math.floor(remainingTime / day);
+  var hoursLeft = Math.floor((remainingTime % day) / hour);
+  var minutesLeft = Math.floor((remainingTime % hour) / minute);
+  var secondsLeft = Math.floor((remainingTime % minute) / second);
+  dayInput.innerHTML = daysLeft;
+  hourInput.innerHTML = hoursLeft;
+  minuteInput.innerHTML = minutesLeft;
+  secondInput.innerHTML = secondsLeft;
+
+  // if (remainingTime <= 0) {
+  //   endDate.setDate(endDate.getTime() + 7);
+  // } currently not working, have to set date manually at the moment.
+}, 1000);

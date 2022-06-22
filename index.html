@@ -19,7 +19,7 @@
             <img id="icon-header" src="images/GyY5z0E.gif">
             <ul>
               <li id="search-nav" class="li-head"><a>Search</a></li>
-              <li id="previous-nav" class="li-head"><a>Previous Weeks</a></li>
+              <li id="previous-nav" class="li-head"><a>Previous Day</a></li>
               <li id="database-nav" class="li-head"><a>Item Database</a></li>
               <li id="random-nav" class="li-head"><a>Random Item</a></li>
             </ul>
@@ -27,10 +27,17 @@
         </div>
       </div>
     </div>
-
   </header>
   <main>
-
+    <div class="container-background">
+      <div class="row">
+        <div class="column-full">
+          <div class="stars"></div>
+          <div class="stars2"></div>
+          <div class="stars3"></div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="view" data-view="featured-items">
         <div class="row">
@@ -43,11 +50,8 @@
         </div>
         <div class="row">
           <div class="column-full">
-            <div id="stars"></div>
-            <div id="stars2"></div>
-            <div id="stars3"></div>
             <div class="background">
-              <ul class="item-list">
+              <ul class="featured-list">
               </ul>
             </div>
           </div>
@@ -55,12 +59,11 @@
         <div class="row">
           <div class="column-full">
             <div class="background">
-              <ul class="item-list-2">
+              <ul class="featured-list-2">
               </ul>
             </div>
           </div>
         </div>
-
         <div class="countdown">
           <h3>Next Reset:</h3>
           <ul>
@@ -81,7 +84,42 @@
               <p>Seconds</p>
             </li>
           </ul>
-
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="view hidden" data-view="previous-weeks">
+        <div class="row">
+          <div class="column-full">
+            <div class="previous-header">
+              <h1>Previous Day</h1>
+              <h1 id="previous-week-head"></h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul class="previous-list">
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul class="previous-list-two">
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul class="previous-list-three">
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul class="previous-list-four">
+            </ul>
+          </div>
         </div>
       </div>
     </div>
