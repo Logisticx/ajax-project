@@ -134,6 +134,45 @@ function createPreviousEntry(object) {
   divElementFour.appendChild(pElement);
   return liElement;
 }
+
+function createSearchEntry(object) {
+  var liElement = document.createElement('li');
+  var divElement = document.createElement('div');
+  divElement.className = 'items-responsive';
+  liElement.appendChild(divElement);
+  var aElement = document.createElement('a');
+  aElement.className = 'item-display rarity-rare';
+  divElement.appendChild(aElement);
+  var pictureElement = document.createElement('picture');
+  aElement.appendChild(pictureElement);
+  var imgElement = document.createElement('img');
+  imgElement.src = object.imageUrl;
+  pictureElement.appendChild(imgElement);
+  var divElementTwo = document.createElement('div');
+  divElementTwo.className = 'item-overlay';
+  aElement.appendChild(divElementTwo);
+  var divElementThree = document.createElement('div');
+  divElementThree.className = 'item-content';
+  divElementTwo.appendChild(divElementThree);
+  var h4Element = document.createElement('h4');
+  h4Element.className = 'item-name';
+  divElementThree.appendChild(h4Element);
+  var spanElement = document.createElement('span');
+  spanElement.textContent = object.name;
+  h4Element.appendChild(spanElement);
+  var divElementFour = document.createElement('div');
+  divElementThree.appendChild(divElementFour);
+  var imgElementTwo = document.createElement('img');
+  imgElementTwo.className = 'price-icon';
+  imgElementTwo.src = 'images/pngaaa.com-1614746.png';
+  divElementFour.appendChild(imgElementTwo);
+  var pElement = document.createElement('p');
+  pElement.className = 'item-price';
+  pElement.textContent = object.vBucks;
+  divElementFour.appendChild(pElement);
+  return liElement;
+}
+
 var targetUrl = encodeURIComponent('https://api.fortnitetracker.com/v1/store');
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
@@ -155,6 +194,7 @@ var previousList = document.querySelector('.previous-list');
 var previousListTwo = document.querySelector('.previous-list-two');
 var previousListThree = document.querySelector('.previous-list-three');
 var previousListFour = document.querySelector('.previous-list-four');
+
 function loadFeatured(object) {
   var entryElement = createNewEntry(object);
   if (featuredList.childNodes.length !== 7) {
@@ -163,6 +203,7 @@ function loadFeatured(object) {
     featuredListTwo.prepend(entryElement);
   }
 }
+
 function loadPrevious(object) {
   var entryElement = createPreviousEntry(object);
   if (previousList.childNodes.length !== 7) {
@@ -200,3 +241,49 @@ xhrTwo.addEventListener('load', function () {
   }
 });
 xhrTwo.send();
+
+// search page
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+var modal = document.querySelector('.modal-bg');
+var modalExit = document.querySelector('#modal-exit');
+modalExit.addEventListener('click', function () {
+  modal.className = 'modal-bg';
+  hiddenView[1].className = 'view';
+  errorMessage.className = 'view';
+  removeAllChildNodes(searchItemList);
+});
+
+var searchInput = document.querySelector('#search-input');
+searchInput.addEventListener('click', function () {
+});
+
+function titleCase(string) {
+  return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
+var searchButton = document.querySelector('.search-button');
+searchButton.addEventListener('click', function () {
+  modal.className = 'modal-bg-on';
+  hiddenView[1].className = 'view hidden';
+  searchItemEntry(titleCase(searchInput.value));
+});
+
+var errorMessage = document.querySelector('#error-message');
+var searchItemList = document.querySelector('#search-item');
+
+function searchItemEntry(string) {
+  for (var i = 0; i < xhr.response.length; i++) {
+    if (string.length < 3) {
+      return;
+    } else if (xhr.response[i].name.includes(string)) {
+      var entryElement = createSearchEntry(xhr.response[i]);
+      searchItemList.prepend(entryElement);
+      errorMessage.className = 'view hidden';
+    }
+  }
+}

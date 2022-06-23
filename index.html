@@ -28,6 +28,18 @@
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <div class="mobile-header">
+            <a href="#search">Search</a>
+            <a href="#previous-day">Previous Day</a>
+            <a href="#database">Item Database</a>
+            <a href="#random-item">Random Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
     <div class="container-background">
@@ -130,19 +142,27 @@
       <div class="view hidden" data-view="search-page">
         <div class="row">
           <div class="column-full">
-            <h1>Looking for an Item?</h1>
-            <div class="search button">
-              <input id="search" type="text" name="name" required minlength="4" maxlength="18"
-              size="80" placeholder="Type here to search for a skin">
-            </div>
-            <div class="modal-bg">
-              <div class="modal-content">
-                <i id="modal-exit" class="gg-close"></i>
-                domcontent
-
+            <div class="search-style">
+              <h1>Looking for an Item?</h1>
+              <div class="search button">
+                <form>
+                  <input id="search-input" type="text" name="name" required minlength="4" maxlength="18"
+                size="80" placeholder="Type here to search for a skin">
+                  <button class="search-button" type="reset" value="submit">SEARCH</button>
+                </form>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="modal-bg">
+        <div class="modal-content">
+          <i id="modal-exit" class="gg-close"></i>
+          <div id="error-message" class="view">
+            <h1>Error finding items of that name. Please try again</h1>
+          </div>
+          <ul id="search-item">
+          </ul>
         </div>
       </div>
     </div>
