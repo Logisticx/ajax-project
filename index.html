@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/background.css">
+  <link href="https://css.gg/close.css" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -17,7 +18,7 @@
         <div class="column-full">
           <div class="nav-bar">
             <img id="icon-header" src="images/GyY5z0E.gif">
-            <ul>
+            <ul class="desktop-list">
               <li id="search-nav" class="li-head"><a>Search</a></li>
               <li id="previous-nav" class="li-head"><a>Previous Day</a></li>
               <li id="database-nav" class="li-head"><a>Item Database</a></li>
@@ -26,7 +27,29 @@
           </div>
         </div>
       </div>
+      <nav class="navbar">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" id="mobile-search" class="nav-link">Search</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="mobile-previous" class="nav-link">Previous Day</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="mobile-item-database" class="nav-link">Item Database</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="mobile-random-item" class="nav-link">Random Item</a>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
     </div>
+
   </header>
   <main>
     <div class="container-background">
@@ -123,6 +146,48 @@
         </div>
       </div>
     </div>
+
+
+    <div class="container">
+      <div class="view hidden" data-view="search-page">
+        <div class="row">
+          <div class="column-full">
+            <div class="search-style">
+              <h1>Looking for an Item?</h1>
+              <div class="search button">
+                <form>
+                  <input id="search-input" type="text" name="name" required minlength="4" maxlength="18"
+                size="80" placeholder="Type here to search for a skin">
+                  <button class="search-button" type="reset" value="submit">SEARCH</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-bg">
+        <div class="modal-content">
+          <i id="modal-exit" class="gg-close"></i>
+          <div id="error-message" class="view">
+            <h1>Error finding items of that name. Please try again</h1>
+          </div>
+          <ul id="search-item">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="view hidden" data-view="item-database-page">
+
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="view hidden" data-view="random-item-page"></div>
+    </div>
+
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
