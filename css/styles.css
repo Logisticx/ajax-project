@@ -302,7 +302,25 @@ a {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 }
 
+.search-button:hover {
+  color: aqua;
+  cursor: pointer;
+}
+
 #modal-exit:hover {
   cursor: pointer;
   color: aliceblue;
+}
+
+.random-button {
+  background-color: #720e9e;
+  color: white;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.random-button:hover {
+  color: #2cc0ff;
+  cursor: pointer;
 }
