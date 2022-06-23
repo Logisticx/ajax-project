@@ -21,6 +21,7 @@ var randomNav = document.getElementById('random-nav');
 randomNav.addEventListener('click', function () {
   data.view = 'random-item-page';
   viewSwapping();
+  randomItem();
 });
 
 var featuredNav = document.getElementById('icon-header');
@@ -51,6 +52,14 @@ var mobileRandom = document.getElementById('mobile-random-item');
 mobileRandom.addEventListener('click', function () {
   data.view = 'random-item-page';
   viewSwapping();
+  randomItem();
+});
+
+var randomButton = document.querySelector('.random-button');
+randomButton.addEventListener('click', function () {
+  data.view = 'random-item-page';
+  viewSwapping();
+  randomItem();
 });
 
 var activeView = document.querySelectorAll('.view');
@@ -85,6 +94,18 @@ function viewSwapping(string) {
     }
   }
 }
+
+var hamburger = document.querySelector('.hamburger');
+var navMenu = document.querySelector('.nav-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+  hamburger.classList.remove('active');
+  navMenu.classList.remove('active');
+}));
 
 function createNewEntry(object) {
   var liElement = document.createElement('li');
@@ -313,14 +334,10 @@ function searchItemEntry(string) {
   }
 }
 
-var hamburger = document.querySelector('.hamburger');
-var navMenu = document.querySelector('.nav-menu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-  hamburger.classList.remove('active');
-  navMenu.classList.remove('active');
-}));
+function randomItem() {
+  var randomList = document.getElementById('random-item-list');
+  var randomObject = xhr.response[Math.floor(Math.random() * xhr.response.length)];
+  var entryElement = createSearchEntry(randomObject);
+  removeAllChildNodes(randomList);
+  randomList.appendChild(entryElement);
+}
