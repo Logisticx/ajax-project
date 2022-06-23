@@ -29,6 +29,30 @@ featuredNav.addEventListener('click', function () {
   viewSwapping();
 });
 
+var mobileSearch = document.getElementById('mobile-search');
+mobileSearch.addEventListener('click', function () {
+  data.view = 'search-page';
+  viewSwapping();
+});
+
+var mobilePrevious = document.getElementById('mobile-previous');
+mobilePrevious.addEventListener('click', function () {
+  data.view = 'previous-weeks';
+  viewSwapping();
+});
+
+var mobileDatabase = document.getElementById('mobile-item-database');
+mobileDatabase.addEventListener('click', function () {
+  data.view = 'item-database-page';
+  viewSwapping();
+});
+
+var mobileRandom = document.getElementById('mobile-random-item');
+mobileRandom.addEventListener('click', function () {
+  data.view = 'random-item-page';
+  viewSwapping();
+});
+
 var activeView = document.querySelectorAll('.view');
 var hiddenView = document.querySelectorAll('.hidden');
 
@@ -138,6 +162,7 @@ function createPreviousEntry(object) {
 function createSearchEntry(object) {
   var liElement = document.createElement('li');
   var divElement = document.createElement('div');
+  // divElement.textContent = 'last in store'; To implement this, need new api.
   divElement.className = 'items-responsive';
   liElement.appendChild(divElement);
   var aElement = document.createElement('a');
@@ -287,3 +312,15 @@ function searchItemEntry(string) {
     }
   }
 }
+
+var hamburger = document.querySelector('.hamburger');
+var navMenu = document.querySelector('.nav-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+  hamburger.classList.remove('active');
+  navMenu.classList.remove('active');
+}));
